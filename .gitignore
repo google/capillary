@@ -1,0 +1,16 @@
+*.iml
+.DS_Store
+/local.properties
+.gradle/
+.idea/
+build/
+
+# Resources used by Capillary demo.
+/demo/android/google-services.json
+/demo/resources/firebase/service-account.json
+/demo/resources/ecdsa/sender_signing_key.dat
+/demo/android/src/main/res/raw/sender_verification_key.dat
+/demo/resources/tls/tls.crt
+/demo/resources/tls/tls.key
+/demo/android/src/main/res/raw/tls.crt
+/demo/resources/sqlite/demo.db

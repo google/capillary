@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+  <!-- Ignore the known UnusedResources issues. -->
+  <issue id="UnusedResources">
+    <ignore path="src/main/res/raw/tls_rsa.crt"/>
+    <ignore path="build/generated/res/google-services/*/values/values.xml"/>
+  </issue>
+
+  <!-- Ignore the known InvalidPackage issues. -->
+  <issue id="InvalidPackage">
+    <ignore path="*/grpc-core-1.7.0.jar"/>
+  </issue>
+
+  <!-- Disable GoogleAppIndexingWarning in the demo app. -->
+  <issue id="GoogleAppIndexingWarning" severity="ignore"/>
+</lint>

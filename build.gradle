@@ -1,0 +1,32 @@
+allprojects {
+    apply plugin: 'project-report'
+
+    buildscript {
+        repositories {
+            google()
+            jcenter()
+        }
+        dependencies {
+            classpath "com.android.tools.build:gradle:3.1.1"
+        }
+    }
+
+    repositories {
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+        google()
+        jcenter()
+    }
+}
+
+subprojects {
+    apply plugin: "checkstyle"
+
+    checkstyle {
+        toolVersion = "8.7"
+        configFile file("${rootDir}/config/checkstyle/google_checks.xml")
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

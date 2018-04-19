@@ -1,0 +1,6 @@
+include ':lib'
+include ':lib-android'
+include ':tools'
+include ':demo:common'
+include ':demo:android'
+include ':demo:server'

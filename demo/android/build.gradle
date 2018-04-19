@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.protobuf'
+
+buildscript {
+    dependencies {
+        classpath "com.google.protobuf:protobuf-gradle-plugin:0.8.3"
+        classpath 'com.google.gms:google-services:3.1.2'
+    }
+}
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.google.capillary.demo.android"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+    sourceSets {
+        main {
+            proto {
+                srcDir project(':demo:common').projectDir.toString() + '/proto'
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+// Checkstyle doesn't run automatically with android
+task checkstyleMain(type: Checkstyle) {
+    source "src/main/java"
+    include '**/*.java'
+    classpath = files()
+}
+check.dependsOn checkstyleMain
+
+def grpcVersion = '1.7.0' // CURRENT_GRPC_VERSION
+
+dependencies {
+    implementation project(':lib-android')
+    implementation project(':demo:common')
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'javax.annotation:javax.annotation-api:1.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.google.protobuf:protobuf-java:3.4.0'
+    implementation "io.grpc:grpc-okhttp:${grpcVersion}"
+    implementation "io.grpc:grpc-protobuf:${grpcVersion}"
+    implementation "io.grpc:grpc-stub:${grpcVersion}"
+    implementation 'com.google.firebase:firebase-messaging:12.0.1'
+    implementation 'com.google.android.gms:play-services-base:12.0.1'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'joda-time:joda-time:2.9.9'
+    androidTestImplementation 'com.android.support:multidex:1.0.3'
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.4.0'
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+        }
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                add java
+            }
+        }
+        all()*.plugins {
+            grpc {
+                option 'enable_deprecated=false'
+            }
+        }
+    }
+}
+
+apply plugin: 'com.google.gms.google-services'

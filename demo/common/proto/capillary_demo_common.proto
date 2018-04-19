@@ -1,0 +1,75 @@
+/*
+ * Copyright 2018 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option java_package = "com.google.capillary.demo.common";
+option java_multiple_files = true;
+
+package capillary.demo.common;
+
+// The types of Capillary public keys.
+enum KeyAlgorithm {
+  RSA_ECDSA = 0;
+  WEB_PUSH = 1;
+}
+
+// A request to add the given user or update the FCM token of an existing user.
+message AddOrUpdateUserRequest {
+  string user_id = 1;
+  string token = 2;
+}
+
+// A request to register the given Capillary public key for the specified user.
+message AddOrUpdatePublicKeyRequest {
+  string user_id = 1;
+  KeyAlgorithm algorithm = 2;
+  bool is_auth = 3;
+  bytes key_bytes = 4;
+}
+
+// A request to send the embedded data bytes encrypted into a Capillary
+// ciphertext to the specified user after the specified delay.
+message SendMessageRequest {
+  string user_id = 1;
+  KeyAlgorithm key_algorithm = 2;
+  bool is_auth_key = 3;
+  int32 delay_seconds = 4;
+  bytes data = 5;
+}
+
+// The Android notification that is shown to the user.
+message SecureNotification {
+  int32 id = 1;
+  string title = 2;
+  string body = 3;
+}
+
+service DemoService {
+  // Registers a new user or updates the FCM token of an existing user.
+  rpc AddOrUpdateUser (AddOrUpdateUserRequest) returns (google.protobuf.Empty) {
+  }
+  // Registers a new Capillary public key for the user or updates the existing
+  // Capillary public key.
+  rpc AddOrUpdatePublicKey (AddOrUpdatePublicKeyRequest) returns (google.protobuf.Empty) {
+  }
+  // Encrypts the supplied data bytes into a Capillary ciphertext and sends it
+  // to the user's device via FCM after the specified delay.
+  rpc SendMessage (SendMessageRequest) returns (google.protobuf.Empty) {
+  }
+}

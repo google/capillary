@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.google.capillary.demo.android.MainActivity">
+
+  <EditText
+      android:id="@+id/host_edit_text"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:hint="@string/host_hint"
+      android:inputType="textUri"
+      android:text="@string/default_host"
+      app:layout_constraintHorizontal_weight="3"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toLeftOf="@+id/port_edit_text"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+  <EditText
+      android:id="@+id/port_edit_text"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:hint="@string/port_hint"
+      android:inputType="numberDecimal"
+      android:text="@string/default_port"
+      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintLeft_toRightOf="@+id/host_edit_text"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/host_edit_text"/>
+
+  <Button
+      android:id="@+id/connect_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:onClick="connect"
+      android:text="@string/connect"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/host_edit_text"/>
+
+  <Button
+      android:id="@+id/disconnect_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:onClick="disconnect"
+      android:text="@string/disconnect"
+      app:layout_constraintStart_toEndOf="@+id/connect_button"
+      app:layout_constraintTop_toTopOf="@+id/connect_button"/>
+
+  <Button
+      android:id="@+id/log_token_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:onClick="logToken"
+      android:text="@string/log_token"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/connect_button"/>
+
+  <Button
+      android:id="@+id/reg_user_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:onClick="regUser"
+      android:text="@string/reg_user"
+      app:layout_constraintLeft_toRightOf="@+id/log_token_button"
+      app:layout_constraintTop_toTopOf="@+id/log_token_button"/>
+
+  <Button
+      android:id="@+id/del_iid_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:onClick="delIid"
+      android:text="@string/del_iid"
+      app:layout_constraintLeft_toRightOf="@+id/reg_user_button"
+      app:layout_constraintTop_toTopOf="@+id/reg_user_button"/>
+
+  <TextView
+      android:id="@+id/algorithm_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="@string/algorithm"
+      app:layout_constraintBottom_toBottomOf="@+id/algorithm_spinner"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/algorithm_spinner"/>
+
+  <Spinner
+      android:id="@+id/algorithm_spinner"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      app:layout_constraintStart_toEndOf="@+id/algorithm_text"
+      app:layout_constraintTop_toBottomOf="@+id/log_token_button"/>
+
+  <TextView
+      android:id="@+id/is_auth_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="@string/is_auth"
+      app:layout_constraintBottom_toBottomOf="@+id/is_auth_spinner"
+      app:layout_constraintStart_toEndOf="@+id/algorithm_spinner"
+      app:layout_constraintTop_toTopOf="@+id/is_auth_spinner"/>
+
+  <Spinner
+      android:id="@+id/is_auth_spinner"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      app:layout_constraintStart_toEndOf="@+id/is_auth_text"
+      app:layout_constraintTop_toTopOf="@+id/algorithm_spinner"/>
+
+  <Button
+      android:id="@+id/gen_key_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:onClick="genKey"
+      android:text="@string/gen_key"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/algorithm_spinner"/>
+
+  <Button
+      android:id="@+id/reg_key_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:onClick="regKey"
+      android:text="@string/reg_key"
+      app:layout_constraintStart_toEndOf="@+id/gen_key_button"
+      app:layout_constraintTop_toTopOf="@+id/gen_key_button"/>
+
+  <Button
+      android:id="@+id/del_key_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:onClick="delKey"
+      android:text="@string/del_key"
+      app:layout_constraintStart_toEndOf="@+id/reg_key_button"
+      app:layout_constraintTop_toTopOf="@+id/reg_key_button"/>
+
+  <EditText
+      android:id="@+id/delay_edit_text"
+      android:layout_width="80dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:hint="@string/delay_hint"
+      android:inputType="numberDecimal"
+      app:layout_constraintBottom_toBottomOf="@+id/req_message_button"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/req_message_button"/>
+
+  <Button
+      android:id="@+id/req_message_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:onClick="reqMessage"
+      android:text="@string/req_message"
+      app:layout_constraintStart_toEndOf="@+id/delay_edit_text"
+      app:layout_constraintTop_toBottomOf="@+id/gen_key_button"/>
+
+  <TextView
+      android:id="@+id/result_text"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:scrollbars="vertical"
+      android:textSize="16sp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/req_message_button"/>
+
+</android.support.constraint.ConstraintLayout>

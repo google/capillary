@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+// Checkstyle doesn't run automatically with android
+task checkstyleMain(type: Checkstyle) {
+    source "src/main/java"
+    include '**/*.java'
+    classpath = files()
+}
+task checkStyleTest(type: Checkstyle) {
+    source 'src/test/java'
+    include '**/*.java'
+    classpath = files()
+}
+task checkStyleAndroidTest(type: Checkstyle) {
+    source 'src/androidTest/java'
+    include '**/*.java'
+    classpath = files()
+}
+check.dependsOn checkstyleMain, checkStyleTest, checkStyleAndroidTest
+
+dependencies {
+    api(project(':lib'), {
+        exclude group: 'com.google.crypto.tink'
+    })
+    implementation('com.google.crypto.tink:tink-android:1.1.0', {
+        exclude group: 'com.google.protobuf'
+    })
+    implementation 'com.google.protobuf:protobuf-java:3.4.0'
+    implementation 'joda-time:joda-time:2.9.9'
+    implementation 'com.android.support:support-annotations:27.1.1'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:1.10.19'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+}

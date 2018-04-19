@@ -1,0 +1,71 @@
+apply plugin: 'application'
+apply plugin: 'com.google.protobuf'
+
+buildscript {
+    dependencies {
+        classpath "com.google.protobuf:protobuf-gradle-plugin:0.8.3"
+    }
+}
+
+def grpcVersion = '1.7.0' // CURRENT_GRPC_VERSION
+
+dependencies {
+    implementation project(':lib')
+    implementation project(':demo:common')
+    implementation 'com.google.protobuf:protobuf-java:3.4.0'
+    implementation "io.grpc:grpc-netty:${grpcVersion}"
+    implementation "io.grpc:grpc-protobuf:${grpcVersion}"
+    implementation "io.grpc:grpc-stub:${grpcVersion}"
+    implementation 'io.netty:netty-tcnative-boringssl-static:2.0.6.Final'
+    implementation 'com.google.api-client:google-api-client:1.23.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.guava:guava:23.4-jre'
+    implementation 'commons-cli:commons-cli:1.4'
+    implementation 'org.xerial:sqlite-jdbc:3.21.0.1'
+}
+
+sourceSets {
+    main {
+        proto {
+            srcDir project(':demo:common').projectDir.toString() + '/proto'
+        }
+    }
+}
+
+mainClassName = 'com.google.capillary.demo.server.DemoServer'
+
+run {
+    if (project.hasProperty("runArgs")) {
+        args(runArgs.split(','))
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.4.0'
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+        }
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.plugins {
+                grpc {
+                    option 'enable_deprecated=false'
+                }
+            }
+        }
+    }
+}
+
+// Inform IntelliJ projects about the generated code.
+apply plugin: 'idea'
+
+idea {
+    module {
+        sourceDirs += file("${projectDir}/build/generated/source/proto/main/grpc")
+        sourceDirs += file("${projectDir}/build/generated/source/proto/main/java")
+    }
+}

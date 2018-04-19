@@ -1,0 +1,29 @@
+apply plugin: 'java'
+apply plugin: 'com.google.protobuf'
+
+buildscript {
+    dependencies {
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.3'
+    }
+}
+
+dependencies {
+    implementation 'com.google.crypto.tink:tink:1.1.0'
+    implementation 'com.google.protobuf:protobuf-java:3.4.0'
+    testImplementation 'junit:junit:4.12'
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.0.0'
+    }
+}
+
+// Inform IntelliJ projects about the generated code.
+apply plugin: 'idea'
+
+idea {
+    module {
+        sourceDirs += file("${projectDir}/build/generated/source/proto/main/java")
+    }
+}

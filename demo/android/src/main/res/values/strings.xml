@@ -1,0 +1,22 @@
+<resources>
+  <string name="app_name" translatable="false">Capillary Demo</string>
+  <string name="channel_name">Messages</string>
+  <string name="channel_description">Capillary Demo Messages</string>
+
+  <string name="host_hint">Host</string>
+  <string name="default_host">10.0.2.2</string>
+  <string name="port_hint">Port</string>
+  <string name="default_port">8443</string>
+  <string name="connect">Connect</string>
+  <string name="disconnect">Disconnect</string>
+  <string name="log_token">Log Token</string>
+  <string name="del_iid">Del IID</string>
+  <string name="reg_user">Reg User</string>
+  <string name="algorithm">Algorithm</string>
+  <string name="is_auth">IsAuth</string>
+  <string name="gen_key">Gen Key</string>
+  <string name="del_key">Del Key</string>
+  <string name="reg_key">Reg Key</string>
+  <string name="delay_hint">delay (s)</string>
+  <string name="req_message">Req Message</string>
+</resources>

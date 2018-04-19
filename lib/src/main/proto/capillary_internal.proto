@@ -1,0 +1,63 @@
+/*
+ * Copyright 2018 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+option java_package = "com.google.capillary.internal";
+option java_multiple_files = true;
+
+package capillary.internal;
+
+// Container for a RSA hybrid encryption ciphertext.
+message HybridRsaCiphertext {
+  bytes symmetric_key_ciphertext = 1;
+  bytes payload_ciphertext = 2;
+}
+
+// Container for a raw RSA public key and its associated metadata.
+message WrappedRsaEcdsaPublicKey {
+  string padding = 1;
+  bytes key_bytes = 2;
+}
+
+// Container for a tink Web Push public key parameters.
+message WrappedWebPushPublicKey {
+  bytes auth_secret = 1;
+  bytes key_bytes = 2;
+}
+
+// Container for a tink Web Push private key parameters.
+message WrappedWebPushPrivateKey {
+  bytes auth_secret = 1;
+  bytes public_key_bytes = 2;
+  bytes private_key_bytes = 3;
+}
+
+// Container for a Capillary public key and its associated metadata.
+message CapillaryPublicKey {
+  string keychain_unique_id = 1;
+  int32 serial_number = 2;
+  bool is_auth = 3;
+  bytes key_bytes = 4;
+}
+
+// Container for a Capillary ciphertext and its associated metadata.
+message CapillaryCiphertext {
+  string keychain_unique_id = 1;
+  int32 key_serial_number = 2;
+  bool is_auth_key = 3;
+  bytes ciphertext = 4;
+}
