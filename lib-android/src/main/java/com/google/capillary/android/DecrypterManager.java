@@ -119,7 +119,7 @@ public final class DecrypterManager {
         return;
       }
       // All these exceptions refer to missing or corrupt decryption keys.
-      if (e instanceof NoSuchKeyException // Thrown by Capillary SDK.
+      if (e instanceof NoSuchKeyException // Thrown by Capillary library.
           // Thrown in API levels 23, 24, 25.
           || (VERSION.SDK_INT >= VERSION_CODES.M && e instanceof KeyPermanentlyInvalidatedException)
           // Thrown in API levels 26, 27.

@@ -54,7 +54,7 @@ import java.util.Arrays;
 import java.util.concurrent.Callable;
 
 /**
- * The main activity of the Android demo app for Capillary SDK.
+ * The main activity of the Android demo app for Capillary library.
  */
 public final class MainActivity extends AppCompatActivity {
 
@@ -149,7 +149,7 @@ public final class MainActivity extends AppCompatActivity {
     isAuthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     isAuthSpinner.setAdapter(isAuthAdapter);
 
-    // Initialize Capillary SDK, gRPC channel, and the Capillary handler.
+    // Initialize Capillary library, gRPC channel, and the Capillary handler.
     Utils.initialize(this);
     initChannelAndDependents();
 

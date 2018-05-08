@@ -95,7 +95,7 @@ final class DemoCapillaryHandler implements CapillaryHandler {
   }
 
   /**
-   * This indicates that a Capillary ciphertext was saved by the SDK to be decrypted later.
+   * This indicates that a Capillary ciphertext was saved to be decrypted later.
    */
   @Override
   public void authCiphertextSavedForLater(byte[] ciphertext, Object extra) {

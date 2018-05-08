@@ -1,6 +1,6 @@
 # Capillary Demo
 
-This demo shows how to use Capillary SDK to send end-to-end (E2E) encrypted messages from an
+This demo shows how to use the Capillary library to send end-to-end (E2E) encrypted messages from an
 application server to Android clients over [Firebase cloud messaging](https://firebase.google.com/docs/cloud-messaging/)
 (FCM). The application server is implemented as a java [gRPC](https://grpc.io/) server. The demo
 supports all android versions starting from [KitKat 4.4](https://www.android.com/versions/kit-kat-4-4/)
@@ -144,7 +144,7 @@ Capillary key pair.
    
    ![gen key](img/gen_key.png)
    
-   The interaction with the Capillary SDK to generate keys can be summarized as:
+   The interaction with the Capillary library to generate keys can be summarized as:
    ```java
    Context context = ... // The current app context.
    String keychainId = ... // Some identifier for the key pair.
@@ -163,11 +163,11 @@ Capillary key pair.
    ![reg key](img/reg_key.png)
    
    The "reg key" operation consists of two steps:
-   1. Obtain the public key from the Capillary SDK. This step can be summarized as:
+   1. Obtain the public key from the Capillary library. This step can be summarized as:
       ```java
       Context context = ... // The current app context.
-      String keychainId = ... // Some identifier for the key pair.
-      boolean isAuth = ... // Whether the private key usage should be guarded by the device lock.
+      String keychainId = ... // The identifier for the key pair.
+      boolean isAuth = ... // Whether the private key usage is guarded by the device lock.
       CapillaryHandler handler = ... // An implementation of CapillaryHandler interface.
       Object extra = ... // Any extra information to be passed back to the handler.
       
@@ -179,7 +179,7 @@ Capillary key pair.
       // To obtain a Web Push public key.
       WebPushKeyManager.getInstance(context, keychainId).getPublicKey(isAuth, handler, extra);
       
-      // The Capillary SDK returns a byte array representing the Capillary public key via the
+      // The Capillary library returns a byte array representing the Capillary public key via the
       // handlePublicKey method of the CapillaryHandler instance.
       ```
    
@@ -217,12 +217,12 @@ demo Android app.
    
    1. (on server) send that ciphertext to the demo Android app via FCM.
    
-   1. (on client) decrypt the received ciphertext using Capillary SDK. This step can be
+   1. (on client) decrypt the received ciphertext using the Capillary library. This step can be
    summarized as:
       ```java
       byte[] ciphertext = ... // The ciphertext received through FCM.
       Context context = ... // The current app context.
-      String keychainId = ... // Some identifier for the key pair.
+      String keychainId = ... // The identifier for the key pair.
       CapillaryHandler handler = ... // An implementation of CapillaryHandler interface.
       Object extra = ... // Any extra information to be passed back to the handler.
       
@@ -235,7 +235,7 @@ demo Android app.
       WebPushKeyManager.getInstance(context, keychainId)
           .getDecrypterManager().decrypt(ciphertext, handler, extra);
       
-      // The Capillary SDK returns a byte array representing the plaintext via the handleData
+      // The Capillary library returns a byte array representing the plaintext via the handleData
       // method of the CapillaryHandler instance.
       ```
    
@@ -279,8 +279,8 @@ delay.
 app calls the `decrypt` method of the associated
 [`DecrypterManager`](../lib-android/src/main/java/com/google/capillary/android/DecrypterManager.java).
 
-1. The Capillary SDK notices that the privated key that is required to decrypt the ciphertext is
-authenticated. So, the SDK saves the ciphertext in the demo Android app's local storage to be
+1. The Capillary library notices that the privated key that is required to decrypt the ciphertext is
+authenticated. So, the library saves the ciphertext in the demo Android app's local storage to be
 decrypted later, and notifies the demo Android app by calling the `authCiphertextSavedForLater`
 method of the supplied [`CapillaryHandler`](../lib-android/src/main/java/com/google/capillary/android/CapillaryHandler.java) instance.
 Notice that
@@ -293,11 +293,11 @@ encrypted messages waiting to be decrypted upon device unlock.
 
 1. The demo Android app waits for the device unlock event using a [`BroadcastReceiver`](https://developer.android.com/reference/android/content/BroadcastReceiver.html)
 named [`DeviceUnlockedBroadcastReceiver`](android/src/main/java/com/google/capillary/demo/android/DeviceUnlockedBroadcastReceiver.java).
-And, after the user unlocks the device, the demo Android app requests the Capillary SDK to decrypt
+And, after the user unlocks the device, the demo Android app requests the Capillary library to decrypt
 any saved ciphertexts. This request to decrypt saved ciphertexts can be summarized as:
    ```java
     Context context = ... // The current app context.
-    String keychainId = ... // Some identifier for the key pair.
+    String keychainId = ... // The identifier for the key pair.
     CapillaryHandler handler = ... // An implementation of CapillaryHandler interface.
     Object extra = ... // Any extra information to be passed back to the handler.
     
@@ -310,7 +310,7 @@ any saved ciphertexts. This request to decrypt saved ciphertexts can be summariz
     WebPushKeyManager.getInstance(context, keychainId)
         .getDecrypterManager().decryptSaved(handler, extra);
     
-    // For each decrypted ciphertext, the Capillary SDK returns a byte array representing the
+    // For each decrypted ciphertext, the Capillary library returns a byte array representing the
     // plaintext via the handleData method of the CapillaryHandler instance.
    ```
 
@@ -318,10 +318,11 @@ any saved ciphertexts. This request to decrypt saved ciphertexts can be summariz
 
 #### Check Auto Key Generation
 
-The Capillary SDK can resolve most errors with minimal interaction with the client Android apps that
-use the SDK. One such error is the corruption of Capillary crypto keys due to the user clearing
-the app storage, bugs in the [Android KeyStore](https://doridori.github.io/android-security-the-forgetful-keystore/#sthash.ZQc7htPU.dpbs), etc.
-To try this out, do the following:
+The Capillary library can resolve most errors with minimal interaction with the client Android apps
+that use the library. One such error is the corruption of Capillary crypto keys due to the user
+clearing the app storage, bugs in the
+[Android KeyStore](https://doridori.github.io/android-security-the-forgetful-keystore/#sthash.ZQc7htPU.dpbs),
+etc. To try this out, do the following:
 
 1. Generate a new key pair (1, 2, 3) and register (4) the public key with the demo application
 server.
@@ -342,11 +343,12 @@ So, what happens behind the scenes?
 1. Upon receiving the ciphertext over FCM, the demo Android app calls the `decrypt` method of the
 associated [`DecrypterManager`](../lib-android/src/main/java/com/google/capillary/android/DecrypterManager.java).
 
-1. The Capillary SDK then notices that the private key required to decrypt the ciphertext is missing
-(or corrupted). Since there is no way to recover that private key, the SDK then generates a new key
-pair with the same algorithm and authentication parameters of the missing key pair.
+1. The Capillary library then notices that the private key required to decrypt the ciphertext is
+missing (or corrupted). Since there is no way to recover that private key, the library then
+generates a new key pair with the same algorithm and authentication parameters of the missing key
+pair.
 
-1. Next, the SDK supplies the newly generated public key to the demo Android app by calling the
+1. Next, the library supplies the newly generated public key to the demo Android app by calling the
 overloaded `handlePublicKey` method of the supplied
 [`CapillaryHandler`](../lib-android/src/main/java/com/google/capillary/android/CapillaryHandler.java)
 instance.
@@ -357,7 +359,7 @@ the demo Android app's implementation of
 registers that public key with the demo application server and also requests a new E2E-encrypted
 message to be sent.
 
-1. The demo Android app receives that ciphertext, and passes it to the Capillary SDK to decrypt.
+1. The demo Android app receives that ciphertext, and passes it to the Capillary library to decrypt.
  
-1. SDK successfully decrypts that ciphertext and passes the plaintext back to the demo Android app,
-which displays the plaintext as a notification.
+1. The Capillary library successfully decrypts that ciphertext and passes the plaintext back to the
+demo Android app, which displays the plaintext as a notification.

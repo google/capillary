@@ -98,7 +98,7 @@ public class WebPushKeyManager extends KeyManager {
   @Override
   synchronized void rawGenerateKeyPair(boolean isAuth) throws GeneralSecurityException {
     // Android Keystore does not support Web Push (i.e., ECDH) protocol. So we have to generate the
-    // Web Push key pair using the Tink SDK, and wrap the generated Web Push private key using a
+    // Web Push key pair using the Tink library, and wrap the generated Web Push private key using a
     // private key stored in Android Keystore. The only cipher that Android Keystore consistently
     // supports across API levels 19-27 is RSA. However, Tink's Web Push private keys are larger
     // than the largest RSA modulus that the Android Keystore supports for all API levels in 19-27.

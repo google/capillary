@@ -59,7 +59,7 @@ public final class DemoServer {
    * @throws Exception as a catch-all exception in main method.
    */
   public static void main(String[] args) throws Exception {
-    // Initialize the Capillary SDK.
+    // Initialize the Capillary library.
     Config.initialize();
 
     // Obtain command line options.

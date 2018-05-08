@@ -21,12 +21,12 @@ import com.google.crypto.tink.signature.SignatureConfig;
 import java.security.GeneralSecurityException;
 
 /**
- * Static methods to initialize Capillary SDK.
+ * Static methods to initialize Capillary library.
  */
 public final class Config {
 
   /**
-   * Initializes the Capillary SDK.
+   * Initializes the Capillary library.
    *
    * <p>This should be called before using any functionality provided by Capillary.
    *

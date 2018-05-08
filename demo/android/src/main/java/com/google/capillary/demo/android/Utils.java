@@ -55,7 +55,7 @@ public final class Utils {
   private static final String USER_ID_KEY = "user_id";
 
   /**
-   * Initializes the Android security provider and the Capillary SDK.
+   * Initializes the Android security provider and the Capillary library.
    */
   static void initialize(Context context) {
     updateAndroidSecurityProvider(context);

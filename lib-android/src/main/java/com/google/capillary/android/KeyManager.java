@@ -239,7 +239,7 @@ public abstract class KeyManager {
       AuthModeUnavailableException,
       GeneralSecurityException {
     // Ideally, we should be able to delete auth keys in an unauthenticated setting. But, not every
-    // Android version allows us to do so. So, we have this check here so that the Capillary SDK
+    // Android version allows us to do so. So, we have this check here so that the Capillary library
     // interface is consistent across all Android API levels that we're supporting.
     if (isAuth) {
       utils.checkAuthModeIsAvailable(context);
