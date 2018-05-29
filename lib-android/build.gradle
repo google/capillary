@@ -40,6 +40,9 @@ dependencies {
     implementation('com.google.crypto.tink:tink-android:1.1.0', {
         exclude group: 'com.google.protobuf'
     })
+    implementation('com.google.crypto.tink:apps-webpush:1.1.0', {
+        exclude group: 'com.google.crypto.tink'
+    })
     implementation 'com.google.protobuf:protobuf-java:3.4.0'
     implementation 'joda-time:joda-time:2.9.9'
     implementation 'com.android.support:support-annotations:27.1.1'

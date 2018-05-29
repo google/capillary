@@ -17,8 +17,8 @@
 package com.google.capillary;
 
 import com.google.capillary.internal.WrappedWebPushPublicKey;
-import com.google.capillary.tink.WebPushHybridEncrypt;
 import com.google.crypto.tink.HybridEncrypt;
+import com.google.crypto.tink.apps.webpush.WebPushHybridEncrypt;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.security.GeneralSecurityException;
 

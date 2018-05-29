@@ -1,4 +1,4 @@
-apply plugin: 'java'
+apply plugin: 'java-library'
 apply plugin: 'com.google.protobuf'
 
 buildscript {
@@ -9,6 +9,7 @@ buildscript {
 
 dependencies {
     implementation 'com.google.crypto.tink:tink:1.1.0'
+    implementation 'com.google.crypto.tink:apps-webpush:1.1.0'
     implementation 'com.google.protobuf:protobuf-java:3.4.0'
     testImplementation 'junit:junit:4.12'
 }
