@@ -44,6 +44,9 @@ def grpcVersion = '1.7.0' // CURRENT_GRPC_VERSION
 dependencies {
     implementation project(':lib-android')
     implementation project(':demo:common')
+    implementation('com.google.crypto.tink:tink-android:1.1.0', {
+        exclude group: 'com.google.protobuf'
+    })
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'javax.annotation:javax.annotation-api:1.2'

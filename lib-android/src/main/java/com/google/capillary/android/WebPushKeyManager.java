@@ -18,13 +18,13 @@ package com.google.capillary.android;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.google.capillary.Base64;
 import com.google.capillary.HybridRsaUtils;
 import com.google.capillary.NoSuchKeyException;
 import com.google.capillary.internal.WrappedWebPushPrivateKey;
 import com.google.capillary.internal.WrappedWebPushPublicKey;
 import com.google.capillary.tink.WebPushHybridDecrypt;
 import com.google.crypto.tink.HybridDecrypt;
+import com.google.crypto.tink.subtle.Base64;
 import com.google.crypto.tink.subtle.EllipticCurves;
 import com.google.crypto.tink.subtle.EllipticCurves.CurveType;
 import com.google.crypto.tink.subtle.EllipticCurves.PointFormatType;

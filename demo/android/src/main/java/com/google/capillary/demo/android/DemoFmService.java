@@ -17,10 +17,10 @@
 package com.google.capillary.demo.android;
 
 import android.util.Log;
-import com.google.capillary.Base64;
 import com.google.capillary.android.DecrypterManager;
 import com.google.capillary.demo.common.Constants;
 import com.google.capillary.demo.common.KeyAlgorithm;
+import com.google.crypto.tink.subtle.Base64;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import io.grpc.ManagedChannel;

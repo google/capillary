@@ -18,7 +18,7 @@ package com.google.capillary.android;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.google.capillary.Base64;
+import com.google.crypto.tink.subtle.Base64;
 import java.util.LinkedList;
 import java.util.List;
 

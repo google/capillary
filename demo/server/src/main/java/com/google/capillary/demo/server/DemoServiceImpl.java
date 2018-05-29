@@ -16,7 +16,6 @@
 
 package com.google.capillary.demo.server;
 
-import com.google.capillary.Base64;
 import com.google.capillary.EncrypterManager;
 import com.google.capillary.NoSuchKeyException;
 import com.google.capillary.demo.common.AddOrUpdatePublicKeyRequest;
@@ -25,6 +24,7 @@ import com.google.capillary.demo.common.Constants;
 import com.google.capillary.demo.common.DemoServiceGrpc;
 import com.google.capillary.demo.common.KeyAlgorithm;
 import com.google.capillary.demo.common.SendMessageRequest;
+import com.google.crypto.tink.subtle.Base64;
 import com.google.protobuf.Empty;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
