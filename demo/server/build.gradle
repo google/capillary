@@ -10,8 +10,8 @@ buildscript {
 def grpcVersion = '1.7.0' // CURRENT_GRPC_VERSION
 
 dependencies {
-    implementation project(':lib')
     implementation project(':demo:common')
+    implementation 'com.google.capillary:lib:1.0.0'
     implementation 'com.google.crypto.tink:tink:1.1.0'
     implementation 'com.google.protobuf:protobuf-java:3.4.0'
     implementation "io.grpc:grpc-netty:${grpcVersion}"

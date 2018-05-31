@@ -4,7 +4,7 @@ apply plugin: 'com.google.protobuf'
 buildscript {
     dependencies {
         classpath "com.google.protobuf:protobuf-gradle-plugin:0.8.3"
-        classpath 'com.google.gms:google-services:3.1.2'
+        classpath 'com.google.gms:google-services:4.0.1'
     }
 }
 
@@ -45,8 +45,8 @@ check.dependsOn checkstyleMain
 def grpcVersion = '1.7.0' // CURRENT_GRPC_VERSION
 
 dependencies {
-    implementation project(':lib-android')
     implementation project(':demo:common')
+    implementation 'com.google.capillary:lib-android:1.0.0'
     implementation('com.google.crypto.tink:tink-android:1.1.0', {
         exclude group: 'com.google.protobuf'
     })
@@ -58,8 +58,8 @@ dependencies {
     implementation "io.grpc:grpc-okhttp:${grpcVersion}"
     implementation "io.grpc:grpc-protobuf:${grpcVersion}"
     implementation "io.grpc:grpc-stub:${grpcVersion}"
-    implementation 'com.google.firebase:firebase-messaging:12.0.1'
-    implementation 'com.google.android.gms:play-services-base:12.0.1'
+    implementation 'com.google.firebase:firebase-core:16.0.0'
+    implementation 'com.google.firebase:firebase-messaging:17.0.0'
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'joda-time:joda-time:2.9.9'
     androidTestImplementation 'com.android.support:multidex:1.0.3'

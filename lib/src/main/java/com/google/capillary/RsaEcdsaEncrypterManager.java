@@ -41,7 +41,7 @@ public final class RsaEcdsaEncrypterManager extends EncrypterManager {
   /**
    * Constructs a new RSA-ECDSA EncrypterManager.
    *
-   * <p>Please note that the {@link InputStream} {@param senderSigningKey} will not be closed.
+   * <p>Please note that the {@link InputStream} {@code senderSigningKey} will not be closed.
    *
    * @param senderSigningKey the serialized Tink signing key.
    * @throws GeneralSecurityException if the initialization fails.

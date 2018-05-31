@@ -1,0 +1,67 @@
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+def libraryVersion = '1.0.0'
+def bintrayRepo = 'capillary'
+def bintrayPackage = 'lib'
+
+def pomConfig = {
+    url 'https://github.com/google/capillary'
+    licenses {
+        license {
+            name 'The Apache License, Version 2.0'
+            url 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+        }
+    }
+    developers {
+        developer {
+            name project.property('user.name')
+            email project.property('user.email')
+            organization 'Google LLC'
+            organizationUrl 'https://www.google.com'
+        }
+    }
+    scm {
+        connection 'scm:git:https://github.com/google/capillary.git'
+        developerConnection 'scm:git:https://github.com/google/capillary.git'
+        url 'https://github.com/google/capillary'
+    }
+}
+
+publishing {
+    publications {
+        MavenLib(MavenPublication) {
+            groupId 'com.google.capillary'
+            artifactId 'lib'
+            version libraryVersion
+
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('name', 'Capillary')
+                root.appendNode('description', 'Capillary is a library to simplify the sending ' +
+                        'of end-to-end (E2E) encrypted push messages from Java-based application ' +
+                        'servers to Android clients. This is the Capillary library for ' +
+                        'Java-based application servers.')
+                root.children().last() + pomConfig
+            }
+
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+}
+
+bintray {
+    user = project.property('bintray.user')
+    key = project.property('bintray.apikey')
+    publications = ['MavenLib']
+    pkg {
+        repo = bintrayRepo
+        name = bintrayPackage
+        userOrg = 'google'
+        version {
+            name = libraryVersion
+        }
+    }
+}

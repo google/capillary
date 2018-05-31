@@ -65,7 +65,7 @@ public final class RsaEcdsaKeyManager extends KeyManager {
   /**
    * Returns the singleton {@link RsaEcdsaKeyManager} instance for the given keychain ID.
    *
-   * <p>Please note that the {@link InputStream} {@param senderVerificationKey} will not be closed.
+   * <p>Please note that the {@link InputStream} {@code senderVerificationKey} will not be closed.
    *
    * @param context the app context.
    * @param keychainId the ID of the key manager.

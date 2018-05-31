@@ -1,3 +1,10 @@
+buildscript {
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+    }
+}
+
 apply plugin: 'com.android.library'
 
 android {
@@ -35,13 +42,13 @@ check.dependsOn checkstyleMain, checkStyleTest, checkStyleAndroidTest
 
 dependencies {
     api(project(':lib'), {
-        exclude group: 'com.google.crypto.tink'
+        exclude group: 'com.google.crypto.tink', module: '*'
     })
     implementation('com.google.crypto.tink:tink-android:1.1.0', {
-        exclude group: 'com.google.protobuf'
+        exclude group: 'com.google.protobuf', module: '*'
     })
     implementation('com.google.crypto.tink:apps-webpush:1.1.0', {
-        exclude group: 'com.google.crypto.tink'
+        exclude group: 'com.google.crypto.tink', module: '*'
     })
     implementation 'com.google.protobuf:protobuf-java:3.4.0'
     implementation 'joda-time:joda-time:2.9.9'
@@ -50,3 +57,32 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:1.10.19'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
 }
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += files(project.android.getBootClasspath())
+}
+
+afterEvaluate {
+    javadoc.classpath += files(android.libraryVariants.collect
+            { variant ->
+                variant.javaCompiler.classpath.files
+            })
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+apply from: 'publish.gradle'

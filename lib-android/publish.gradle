@@ -1,0 +1,54 @@
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+def libraryVersion = '1.0.0'
+def bintrayRepo = 'capillary'
+def bintrayPackage = 'lib-android'
+
+group = 'com.google.capillary'
+version = libraryVersion
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            name 'Capillary Android'
+            description 'Capillary is a library to simplify the sending of end-to-end (E2E) ' +
+                    'encrypted push messages from Java-based application servers to Android ' +
+                    'clients. This is the Capillary library for Android clients.'
+            url 'https://github.com/google/capillary'
+            licenses {
+                license {
+                    name 'The Apache License, Version 2.0'
+                    url 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                }
+            }
+            developers {
+                developer {
+                    name project.property('user.name')
+                    email project.property('user.email')
+                    organization = 'Google LLC'
+                    organizationUrl 'https://www.google.com'
+                }
+            }
+            scm {
+                connection 'scm:git:https://github.com/google/capillary.git'
+                developerConnection 'scm:git:https://github.com/google/capillary.git'
+                url 'https://github.com/google/capillary'
+            }
+        }
+    }
+}
+
+bintray {
+    user = project.property('bintray.user')
+    key = project.property('bintray.apikey')
+    configurations = ['archives']
+    pkg {
+        repo = bintrayRepo
+        name = bintrayPackage
+        userOrg = 'google'
+        version {
+            name = libraryVersion
+        }
+    }
+}

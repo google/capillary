@@ -6,8 +6,6 @@ more details.
 
 ## Installation
 
-TODO: verify dependency paths after publishing artifacts.
-
 To add a dependency using Maven:
 
 - For a Java-based server:

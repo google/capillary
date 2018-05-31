@@ -76,6 +76,7 @@ import javax.crypto.spec.OAEPParameterSpec;
  * </ol>
  *
  * <p>The format of the RsaEcdsa ciphertext is the following:
+ * <pre>{@code
  * +------------------------------------------+
  * | ECDSA Signature Length (4 bytes)         |
  * +------------------------------------------+
@@ -83,6 +84,7 @@ import javax.crypto.spec.OAEPParameterSpec;
  * +------------------------------------------+
  * | RSA+AES-GCM hybrid-encryption ciphertext |
  * +------------------------------------------+
+ * }</pre>
  *
  * <p>This implementation of RSA-ECDSA depends on the <a href="https://github.com/google/tink"
  * target="_blank">Tink</a> crypto library to perform AES-GCM and ECDSA operations.
