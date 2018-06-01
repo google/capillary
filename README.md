@@ -1,8 +1,8 @@
 # Capillary
 
 This is a library to simplify the sending of end-to-end (E2E) encrypted push messages from
-application servers to Android clients. Please check the instruction below and the [demo](demo) for
-more details.
+Java-based application servers to Android clients. Please check the instructions below and the
+[demo](demo) for more details.
 
 ## Installation
 
