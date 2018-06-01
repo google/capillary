@@ -41,6 +41,13 @@ To add a dependency using Gradle:
   }
   ```
 
+## API docs
+
+- Java:
+  - [1.0.0](https://google.github.com/capillary/javadoc/lib/1.0.0)
+- Android:
+  - [1.0.0](https://google.github.com/capillary/javadoc/lib-android/1.0.0)
+
 ## Introduction
 
 To use push messaging services to send messages to connected devices, developers must send them

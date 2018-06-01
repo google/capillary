@@ -66,14 +66,18 @@ task sourcesJar(type: Jar) {
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath += files(project.android.getBootClasspath())
+    failOnError false
 }
 
+// Only needed when cutting releases. lib.jar has to be created before running the following.
+/*
 afterEvaluate {
     javadoc.classpath += files(android.libraryVariants.collect
             { variant ->
                 variant.javaCompiler.classpath.files
             })
 }
+*/
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
