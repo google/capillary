@@ -24,8 +24,10 @@ install {
             }
             developers {
                 developer {
-                    name project.property('user.name')
-                    email project.property('user.email')
+                    name project.hasProperty('user.name') ?
+                            project.property('user.name') : System.getenv('USER_NAME')
+                    email project.hasProperty('user.email') ?
+                            project.property('user.email') : System.getenv('USER_EMAIL')
                     organization = 'Google LLC'
                     organizationUrl 'https://www.google.com'
                 }
@@ -40,8 +42,10 @@ install {
 }
 
 bintray {
-    user = project.property('bintray.user')
-    key = project.property('bintray.apikey')
+    user = project.hasProperty('bintray.user') ?
+            project.property('bintray.user') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintray.apikey') ?
+            project.property('bintray.apikey') : System.getenv('BINTRAY_APIKEY')
     configurations = ['archives']
     pkg {
         repo = bintrayRepo

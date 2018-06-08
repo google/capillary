@@ -53,8 +53,10 @@ publishing {
 }
 
 bintray {
-    user = project.property('bintray.user')
-    key = project.property('bintray.apikey')
+    user = project.hasProperty('bintray.user') ?
+            project.property('bintray.user') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintray.apikey') ?
+            project.property('bintray.apikey') : System.getenv('BINTRAY_APIKEY')
     publications = ['MavenLib']
     pkg {
         repo = bintrayRepo
