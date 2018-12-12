@@ -98,7 +98,7 @@ until the user has unlocked and decrypted their device.
 
 - Web Push
   
-  **Pro:** Follows the [IETF RFC 8290](https://tools.ietf.org/html/rfc8291), therefore allows
+  **Pro:** Follows the [IETF RFC 8291](https://tools.ietf.org/html/rfc8291), therefore allows
   developers to share code and key storage infrastructure with existing Web Push implementations.
   Web Push protocol is based on the Elliptic-curve Diffie-Hellman (ECDH) key exchange algorithm,
   which is highly efficient for performance-constrained devices. Note that apps (as opposed to
